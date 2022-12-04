@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     post "/users/validate_login", to: "users#validate_login"
 
     # ROUTES FOR MESSAGE
-    post "/messages", to: "message#create"
+    post "/messages", to: "messages#create"
 
     root "messages#index"
 end

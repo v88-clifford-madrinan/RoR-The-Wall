@@ -3,6 +3,15 @@
 <div>
     <h1>Home</h1>
 
+<%# DISPLAY ERROR OR MESSAGE FOR MESSAGE FORM %>
+<% if flash[:error] %>
+    <% for i in 0..flash[:error].length() %>
+    <p><%= flash[:error][i] %></p>
+    <% end %>
+<% elsif flash[:message] %>
+    <p><%= flash[:message] %></p>
+<% end %>
+
     <form action="/messages" method="POST">
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
@@ -10,4 +19,18 @@
         <textarea name="message[message]"></textarea>
         <input type="submit">
     </form>
+
+<% @messages.each do | message | %>
+    <div style="margin-left: 30px">
+        <h3><%= message.user.first_name %></h3>
+        <p><%= message["message"] %><p>
+
+        <form>
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <h4>Write a comment for this message:</h4>
+            <textarea name="comment[comment]"></textarea>
+            <input type="submit">
+        </form>
+    </div>
+<% end %>
 </div>

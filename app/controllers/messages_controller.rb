@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
     def index
+        @messages = Message.all
         render "messages/index"
     end
 
