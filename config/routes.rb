@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     
     # ROUTES FOR COMMENT
     post "/comments", to: "comments#create"
+    delete "/comments/:id", to: "comments#destroy"
 
     root "messages#index"
 end

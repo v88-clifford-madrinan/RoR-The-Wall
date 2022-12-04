@@ -16,6 +16,11 @@ class CommentsController < ApplicationController
         redirect_to "/"
     end
 
+    def destroy
+        Comment.find(params[:id]).delete
+        redirect_to "/"
+    end
+
     private def create_params
         params.require(:comment).permit(:comment, :message_id)
     end
