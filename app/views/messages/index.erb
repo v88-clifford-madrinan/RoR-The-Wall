@@ -30,12 +30,33 @@
         <a href="/messages/<%= message['id'] %>" data-method="delete">Delete this message</a>
     <% end %>
 
-        <form>
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-            <h4>Write a comment for this message:</h4>
-            <textarea name="comment[comment]"></textarea>
-            <input type="submit">
-        </form>
+        <div style="margin-left: 30px">
+            <div>
+    <% message.comments.each do |comment| %>
+                <h4><%= comment.user.first_name %><h4>
+                <p><%= comment["comment"] %><p>
+        <% if comment["user_id"] == session[:user_id] %>
+                <a href="/comments/<%= message['id'] %>" data-method="delete">Delete this comment</a>
+        <% end %>
+    <% end %>
+            </div>
+            <form action="/comments" method="POST">
+    <%# DISPLAY ERROR OR MESSAGE FOR MESSAGE FORM %>
+    <% if flash[:comments_error] %>
+        <% for i in 0..flash[:comments_error].length() %>
+                <p><%= flash[:comments_error][i] %></p>
+        <% end %>
+    <% elsif flash[:comments_message] %>
+                <p><%= flash[:comments_message] %></p>
+    <% end %>
+                <h5>Write a comment for this message:</h5>
+                
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="comment[message_id]" value="<%= message['id'] %>">
+                <textarea name="comment[comment]"></textarea>
+                <input type="submit">
+            </form>
+        </div>
     </div>
 <% end %>
 </div>

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     # ROUTES FOR MESSAGE
     post "/messages", to: "messages#create"
     delete "/messages/:id", to: "messages#destroy"
+    
+    # ROUTES FOR COMMENT
+    post "/comments", to: "comments#create"
 
     root "messages#index"
 end
