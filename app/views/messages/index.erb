@@ -1,0 +1,13 @@
+<% content_for :title, "Home | The Wall" %>
+
+<div>
+    <h1>Home</h1>
+
+    <form action="/messages" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+        <h2>Write something:</h2>
+        <textarea name="message[message]"></textarea>
+        <input type="submit">
+    </form>
+</div>

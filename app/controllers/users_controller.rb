@@ -43,7 +43,24 @@ class UsersController < ApplicationController
         end
     end
 
+    def validate_login
+        user_exists = User.find_by(email: login_params["email"], password: login_params["password"])
+
+        if user_exists
+            session[:user_id] = user_exists.id
+
+            redirect_to "/"
+        else
+            flash[:message] = "Account doesn't exists!"
+            redirect_to "/login"
+        end
+    end
+
     private def create_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
+
+    private def login_params
+        params.require(:user).permit(:email, :password)
     end
 end
