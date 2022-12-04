@@ -33,10 +33,10 @@
         <div style="margin-left: 30px">
             <div>
     <% message.comments.each do |comment| %>
-                <h4><%= comment.user.first_name %><h4>
-                <p><%= comment["comment"] %><p>
+                <h4><%= comment.user.first_name %></h4>
+                <p><%= comment["comment"] %></p>
         <% if comment["user_id"] == session[:user_id] %>
-                <a href="/comments/<%= message['id'] %>" data-method="delete">Delete this comment</a>
+                <a href="/comments/<%= comment['id'] %>" data-method="delete">Delete this comment</a>
         <% end %>
     <% end %>
             </div>

@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
     end
 
     def destroy
-        Message.find(params[:id]).delete
+        Message.find(params[:id]).destroy
         redirect_to "/"
     end
 
