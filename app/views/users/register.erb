@@ -1,0 +1,56 @@
+<% content_for :title, "Sign up | The Wall" %>
+
+<div>
+    <h1>Welcome to "The Wall"!</h1>
+    <p>Sign up and create your own account</p>
+    
+    <% if flash[:error] %>
+        <% for i in 0..flash[:error].length() %>
+        <p><%= flash[:error][i] %></p>
+        <% end %>
+    <% elsif flash[:message] %>
+        <p><%= flash[:message] %></p>
+    <% end %>
+
+    <form action="/users" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+        <div>
+            <label>
+                First Name:
+                <input type="text" name="user[first_name]" placeholder="Enter your first name">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Last Name:
+                <input type="text" name="user[last_name]" placeholder="Enter your last name">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Email:
+                <input type="email" name="user[email]" placeholder="Enter your email">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Password:
+                <input type="password" name="user[password]" placeholder="Enter your password">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Confirm Password:
+                <input type="password" name="user[password_confirmation]" placeholder="Re-enter your password">
+            </label>
+        </div>
+
+        <input type="submit" value="Sign up">
+        <a href="/login">Already have an account?</a>
+    </form>
+</div>
