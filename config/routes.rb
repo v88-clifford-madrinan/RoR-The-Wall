@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     get "/register", to: "users#new"
     post "/users", to: "users#create"
     post "/users/validate_login", to: "users#validate_login"
+    get "/logout", to: "users#logout"
 
     # ROUTES FOR MESSAGE
     post "/messages", to: "messages#create"
+    delete "/messages/:id", to: "messages#destroy"
 
     root "messages#index"
 end

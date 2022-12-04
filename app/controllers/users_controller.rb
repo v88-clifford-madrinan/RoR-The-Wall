@@ -7,6 +7,11 @@ class UsersController < ApplicationController
         render "users/register"
     end
 
+    def logout
+        session[:user_id] = nil
+        redirect_to "/login"
+    end
+
     def create
         if create_params["password"] == ""
             # MAKING SURE THAT PASSWORD IS NOT EMPTY, IF IT IS, THEN CREATE THE MESSAGE THEN REDIRECT TO /register

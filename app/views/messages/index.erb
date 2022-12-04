@@ -3,6 +3,8 @@
 <div>
     <h1>Home</h1>
 
+    <a href="logout">Sign Out</a>
+
 <%# DISPLAY ERROR OR MESSAGE FOR MESSAGE FORM %>
 <% if flash[:error] %>
     <% for i in 0..flash[:error].length() %>
@@ -24,6 +26,9 @@
     <div style="margin-left: 30px">
         <h3><%= message.user.first_name %></h3>
         <p><%= message["message"] %><p>
+    <% if message["user_id"] == session[:user_id] %>
+        <a href="/messages/<%= message['id'] %>" data-method="delete">Delete this message</a>
+    <% end %>
 
         <form>
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

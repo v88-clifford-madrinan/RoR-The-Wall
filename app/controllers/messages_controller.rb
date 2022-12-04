@@ -1,7 +1,11 @@
 class MessagesController < ApplicationController
     def index
-        @messages = Message.all
-        render "messages/index"
+        if session[:user_id]
+            @messages = Message.order("id desc")
+            render "messages/index"
+        else
+            redirect_to "/login"
+        end
     end
 
     def create
@@ -16,6 +20,11 @@ class MessagesController < ApplicationController
             flash[:error] = message.errors.full_messages
         end
 
+        redirect_to "/"
+    end
+
+    def destroy
+        Message.find(params[:id]).delete
         redirect_to "/"
     end
 
